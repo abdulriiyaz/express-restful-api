@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Products = require("../model/products");
+const Category = require("../model/products");
 
 
 //REQUEST: post a product
@@ -12,8 +13,19 @@ router.post("/create", (req, res) => {
     unitStock: req.body.unitStock,
     discontinued: req.body.discontinued,
     categoryId: Date.now(),
-    categoryName: req.body.categoryName,
+    category: {
+      categoryName: req.body.category.categoryName,
+    },
   });
+
+  const newCategory = new Category({
+    category: {
+      categoryName: req.body.category.categoryName,
+    },
+  });
+
+  newCategory
+  .save()
 
   newProduct
     .save()
@@ -37,7 +49,7 @@ router.patch("/update/:id", (req, res) => {
       product.unitPrice = req.body.unitPrice;
       product.unitStock = req.body.unitStock;
       product.discontinued = req.body.discontinued;
-      product.category = req.body.category;
+      product.categoryName = req.body.category.categoryName;
 
       product
         .save()
