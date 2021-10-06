@@ -5,7 +5,7 @@ const Category = require("../model/products");
 
 
 //REQUEST: post a product
-router.post("/create", (req, res) => {
+router.post("/create", async (req, res) => {
   const newProduct = new Products({
     productName: req.body.productName,
     qtyPerUnit: req.body.qtyPerUnit,
@@ -13,19 +13,7 @@ router.post("/create", (req, res) => {
     unitStock: req.body.unitStock,
     discontinued: req.body.discontinued,
     categoryId: Date.now(),
-    category: {
-      categoryName: req.body.category.categoryName,
-    },
   });
-
-  const newCategory = new Category({
-    category: {
-      categoryName: req.body.category.categoryName,
-    },
-  });
-
-  newCategory
-  .save()
 
   newProduct
     .save()
@@ -34,10 +22,14 @@ router.post("/create", (req, res) => {
 });
 
 //REQUEST: get all products
-router.get("/readAll", (req, res) => {
-  Products.find()
-    .then((products) => res.json(products))
-    .catch((err) => res.status(400).json(`Error: ${err}`));
+router.get("/readAll", async (req, res) => {
+  try{
+    const products = await Products.find();
+    res.json(products);
+  }
+  catch (err) {
+    res.status(500).json({message: err.message});
+  }
 });
 
 //REQUEST: update a product
@@ -49,7 +41,6 @@ router.patch("/update/:id", (req, res) => {
       product.unitPrice = req.body.unitPrice;
       product.unitStock = req.body.unitStock;
       product.discontinued = req.body.discontinued;
-      product.categoryName = req.body.category.categoryName;
 
       product
         .save()
