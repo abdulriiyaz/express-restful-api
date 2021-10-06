@@ -20,9 +20,13 @@ The server is built using express and mongoDB is used for nosql database.
 
 
 
-## Installation
+## Installation & Setup Environment Variables
+- create .env file in root directory
+- Set Variable DB_CONNECTION to the URI provided by MongoDB
+- Set PORT (e.g: 3000)
 
  requires :
+ 
  [Node.js](https://nodejs.org/) v10+ to run.
 Install the dependencies and devDependencies and start the server.
 
@@ -32,10 +36,7 @@ npm i
 node app
 ```
 
-## Setup Environment Variables
-- create .env file in root directory
-- Set Variable DB_CONNECTION to the URI provided by MongoDB
-- Set PORT (e.g: 3000)
+
 
 ### Try it on [POSTMAN](https://www.postman.com/) 
 
