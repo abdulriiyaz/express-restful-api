@@ -13,8 +13,8 @@ The server is built using express and mongoDB is used for nosql database.
 ## Features
 
 - **/create** will create the product and category.
-- **/read/:id** will read particular record from the product table (if product has any category then category should be fetched in the response)
-- **/readAll** will all the records from the product table (if product has any category then category should be fetched in the response)
+- **/read/:id** will read particular record from the product table (if product has any category then category will be fetched in the response)
+- **/readAll** will all the records from the product table (if product has any category then category will be fetched in the response)
 - **/update/:id** will update one particular record of the product
 - **/delete/:id** will delete one particular record of the product.
 
