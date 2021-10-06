@@ -1,18 +1,19 @@
 const express = require("express");
 const router = express.Router();
 const Products = require("../model/products");
-const Category = require("../model/products");
-
+const Category = require("../model/category");
 
 //REQUEST: post a product
 router.post("/create", async (req, res) => {
-  const newProduct = new Products({
+  const newProduct = await new Products({
     productName: req.body.productName,
     qtyPerUnit: req.body.qtyPerUnit,
     unitPrice: req.body.unitPrice,
     unitStock: req.body.unitStock,
     discontinued: req.body.discontinued,
-    categoryId: Date.now(),
+    category: new Category({
+      categoryName: req.body.category.categoryName,
+    })
   });
 
   newProduct
@@ -23,12 +24,11 @@ router.post("/create", async (req, res) => {
 
 //REQUEST: get all products
 router.get("/readAll", async (req, res) => {
-  try{
+  try {
     const products = await Products.find();
     res.json(products);
-  }
-  catch (err) {
-    res.status(500).json({message: err.message});
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 });
 

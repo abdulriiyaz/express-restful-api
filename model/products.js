@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const categorySchema = require("../model/category")
+const category = require("../model/category")
 
 
 const productSchema = new Schema({
@@ -9,9 +9,12 @@ const productSchema = new Schema({
   unitPrice: { type: Number, required: true },
   unitStock: { type: Number, required: true },
   discontinued: { type: Boolean, default: false },
-  categoryId: { type: Number, required: false }
+  categoryId: { type: Number, required: false },
+  category : {
+    type: Schema.Types.ObjectId,
+    ref: 'category',
+  }
 });
 
 const Products = mongoose.model("Products", productSchema);
-
 module.exports = Products;
