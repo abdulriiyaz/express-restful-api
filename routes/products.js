@@ -5,20 +5,30 @@ const Category = require("../model/category");
 
 //REQUEST: post a product
 router.post("/create", async (req, res) => {
+  const newCategory = new Category({
+    categoryId: Date.now(),
+    categoryName: req.body.categoryName,
+  });
+
   const newProduct = await new Products({
     productName: req.body.productName,
     qtyPerUnit: req.body.qtyPerUnit,
     unitPrice: req.body.unitPrice,
     unitStock: req.body.unitStock,
     discontinued: req.body.discontinued,
-    category: new Category({
-      categoryName: req.body.category.categoryName,
-    })
+    categoryId: new Category(),
+    category: newCategory
   });
+
+  newCategory.save()
+  .catch(err => {
+    res.status(400).json(`Error ${err}`);
+
+  })
 
   newProduct
     .save()
-    .then(() => res.json("The New Product posted successfully!"))
+    .then(() => res.json("Product and Category posted successfully!"))
     .catch((err) => res.status(400).json(`Error ${err}`));
 });
 
@@ -26,6 +36,7 @@ router.post("/create", async (req, res) => {
 router.get("/readAll", async (req, res) => {
   try {
     const products = await Products.find();
+    const category = await Category.find();
     res.json(products);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -62,6 +73,8 @@ router.delete("/delete/:id", (req, res) => {
   Products.findByIdAndDelete(req.params.id)
     .then(() => res.json("product is Deleted!"))
     .catch((err) => res.status(400).json(`Error: ${err}`));
+
+  Category.findByIdAndDelete;(req.params.id)
 });
 
 module.exports = router;

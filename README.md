@@ -36,12 +36,77 @@ npm i
 node app
 ```
 
+## APIs
+
+- localhost:3000/product/create
+- localhost:3000/product/readAll
+- localhost:3000/product/delete/[:id]
+- localhost:3000/product/read/[:id]
+- localhost:3000/product/update/[:id]
+
+## JSON
+**Creating Product**
+```sh
+{
+    "productName": "Moto X",
+    "qtyPerUnit": 7800,
+    "unitPrice": 1299,
+    "unitStock": 8000,
+    "discontinued": false
+}
+```
+**Updating Product**
+```sh
+{
+    "category": {
+      "categoryName": "safe"
+    },
+    "productName": "Changing  Product",
+    "qtyPerUnit": 9865,
+    "unitPrice": 500,
+    "unitStock": 22,
+    "discontinued": false
+  }
+```
+### Response
+```sh
+[
+  {
+    "_id": "615e8b50521edcd7967dccfb",
+    "productName": "Changing  Product",
+    "qtyPerUnit": 9865,
+    "unitPrice": 500,
+    "unitStock": 22,
+    "discontinued": false,
+    "categoryId": "615e8b50521edcd7967dccfa",
+    "__v": 0
+  },
+  {
+    "_id": "615e8d8b521edcd7967dcd08",
+    "productName": "iPhone X",
+    "qtyPerUnit": 2124,
+    "unitPrice": 1000,
+    "unitStock": 4554,
+    "discontinued": false,
+    "categoryId": "615e8d8b521edcd7967dcd07",
+    "__v": 0
+  },
+  {
+    "_id": "615e8da6521edcd7967dcd0d",
+    "productName": "Samsung",
+    "qtyPerUnit": 854,
+    "unitPrice": 1121,
+    "unitStock": 414,
+    "discontinued": true,
+    "categoryId": "615e8da6521edcd7967dcd0c",
+    "__v": 0
+  }
+]
+```
+
+
 
 
 ### Try it on [POSTMAN](https://www.postman.com/) 
-
-## Preview
-
-
 ## License
 MIT

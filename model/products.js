@@ -9,8 +9,7 @@ const productSchema = new Schema({
   unitPrice: { type: Number, required: true },
   unitStock: { type: Number, required: true },
   discontinued: { type: Boolean, default: false },
-  categoryId: { type: Number, required: false },
-  category : {
+  categoryId : {
     type: Schema.Types.ObjectId,
     ref: 'category',
   }
